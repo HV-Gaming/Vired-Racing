@@ -34,6 +34,7 @@ public class CarAI : MonoBehaviour
     public bool Patrol = true;
     public Transform CustomDestination;
     public float com_caliberation = -0.9f;
+    public float SA;
 
     [HideInInspector] public bool move;// Look at the documentation for a detailed explanation
 
@@ -55,9 +56,11 @@ public class CarAI : MonoBehaviour
         move = true;
     }
 
+    public Rigidbody rb;
     void Start()
     {
-        GetComponent<Rigidbody>().centerOfMass = new Vector3(0, com_caliberation, 0);
+        rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = new Vector3(0, com_caliberation, 0);
         CalculateNavMashLayerBite();
     }
 
@@ -66,6 +69,10 @@ public class CarAI : MonoBehaviour
         UpdateWheels();
         ApplySteering();
         PathProgress();
+
+        float dif = Vector3.Angle(rb.velocity, transform.up);
+        print(dif);
+
     }
 
     private void CalculateNavMashLayerBite()
@@ -280,15 +287,28 @@ public class CarAI : MonoBehaviour
     {
         Vector3 relativeVector = transform.InverseTransformPoint(PostionToFollow);
         float SteeringAngle = (relativeVector.x / relativeVector.magnitude) * MaxSteeringAngle;
-        if (SteeringAngle > 30)
-        {
-            LocalMaxSpeed = 50;
-            print("slowed");
-        }
-        else LocalMaxSpeed = MaxRPM;
+        SA = SteeringAngle;
 
+        //--------------changed by Ajay ----------------//
+        if (SteeringAngle <= -10 || SteeringAngle >= 10)
+        {
+            LocalMaxSpeed = 5;
+            print("slowed");
+
+            //GetComponent<Rigidbody>().drag = 0.5f;
+
+        }
+        else
+        {
+
+            LocalMaxSpeed = MaxRPM;
+            //GetComponent<Rigidbody>().drag = 0;
+        }
+        //---------------end of change------------------//
         frontLeft.steerAngle = SteeringAngle;
         frontRight.steerAngle = SteeringAngle;
+
+
     }
 
     void Movement() // moves the car forward and backward depending on the input
@@ -374,4 +394,6 @@ public class CarAI : MonoBehaviour
             Gizmos.DrawRay(carFront.position, rightRayDirection * rayRange);
         }
     }
+
+
 }

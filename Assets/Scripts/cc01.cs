@@ -10,6 +10,11 @@ public class cc01 : MonoBehaviour
         Buttons
     };
 
+    public AudioClip[] audios;
+    public AudioSource AS;
+
+    public float speedLimit = 24.0f;
+
     public enum Axel
     {
         Front,
@@ -58,7 +63,45 @@ public class cc01 : MonoBehaviour
         GetInputs();
         AnimateWheels();
         WheelEffects();
+        playaudio();
 
+        // if (carRb.velocity.magnitude >= 24)
+        // {
+        //     carRb.velocity.magnitude = 24;
+        // }
+
+        if (carRb.velocity.magnitude >= speedLimit)
+        {
+            carRb.velocity = carRb.velocity.normalized * speedLimit;
+        }
+
+
+
+
+
+
+    }
+
+    public void playaudio()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            AS.clip = audios[1];
+            AS.Play();
+        }
+        else
+        {
+            AS.clip = audios[0];
+            AS.Play();
+
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            AS.clip = audios[2];
+            AS.Play();
+            print("Braking");
+        }
     }
 
     void LateUpdate()
@@ -92,7 +135,12 @@ public class cc01 : MonoBehaviour
     {
         foreach (var wheel in wheels)
         {
-            wheel.wheelCollider.motorTorque = moveInput * 500 * maxAcceleration * Time.deltaTime;
+            wheel.wheelCollider.motorTorque = moveInput * 300 * maxAcceleration * Time.deltaTime;
+
+            if (wheel.wheelCollider.motorTorque >= 60)
+            {
+                wheel.wheelCollider.motorTorque = 60;
+            }
         }
     }
 
@@ -114,6 +162,8 @@ public class cc01 : MonoBehaviour
         {
             foreach (var wheel in wheels)
             {
+
+
                 wheel.wheelCollider.brakeTorque = 300 * brakeAcceleration * Time.deltaTime;
             }
 
@@ -178,6 +228,8 @@ public class cc01 : MonoBehaviour
             this.transform.rotation = Quaternion.identity;
         }
     }
+
+
 
 
 }
