@@ -71,7 +71,7 @@ public class CarAI : MonoBehaviour
         PathProgress();
 
         float dif = Vector3.Angle(rb.velocity, transform.up);
-        print(dif);
+        //print(dif);
 
     }
 
@@ -290,9 +290,9 @@ public class CarAI : MonoBehaviour
         SA = SteeringAngle;
 
         //--------------changed by Ajay ----------------//
-        if (SteeringAngle <= -10 || SteeringAngle >= 10)
+        if (SteeringAngle <= -2 || SteeringAngle >= 2)
         {
-            LocalMaxSpeed = 5;
+            LocalMaxSpeed = 80;
             print("slowed");
 
             //GetComponent<Rigidbody>().drag = 0.5f;

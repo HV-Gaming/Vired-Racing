@@ -15,6 +15,9 @@ public class cc01 : MonoBehaviour
 
     public float speedLimit = 24.0f;
 
+    bool gamePaused = false;
+    public bool played = false;
+
     public enum Axel
     {
         Front,
@@ -75,7 +78,29 @@ public class cc01 : MonoBehaviour
             carRb.velocity = carRb.velocity.normalized * speedLimit;
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (gamePaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
 
+        void PauseGame()
+        {
+            Time.timeScale = 0f;
+            gamePaused = true;
+        }
+
+        void ResumeGame()
+        {
+            Time.timeScale = 1f;
+            gamePaused = false;
+        }
 
 
 
@@ -84,24 +109,29 @@ public class cc01 : MonoBehaviour
 
     public void playaudio()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (!AS.isPlaying && Input.GetKey(KeyCode.W))
         {
             AS.clip = audios[1];
-            AS.Play();
+            AS.PlayOneShot(AS.clip);
+            played = true;
         }
-        else
-        {
-            AS.clip = audios[0];
-            AS.Play();
+        // else
+        // {
+        //     AS.clip = audios[0];
+        //     AS.PlayOneShot(AS.clip);
+        //     played = true;
 
-        }
+        // }
 
-        if (Input.GetKey(KeyCode.Space))
+        if (!AS.isPlaying && Input.GetKey(KeyCode.Space))
         {
             AS.clip = audios[2];
-            AS.Play();
+            AS.PlayOneShot(AS.clip);
             print("Braking");
+            played = true;
         }
+
+        played = false;
     }
 
     void LateUpdate()
