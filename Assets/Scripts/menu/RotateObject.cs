@@ -5,6 +5,14 @@ using UnityEngine;
 public class RotateObject : MonoBehaviour
 {
     public float rotationSpeed = 10f;
+
+    void Awake()
+    {
+        {
+
+            Time.timeScale = 1;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {

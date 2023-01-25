@@ -12,7 +12,7 @@ public class skinmanager : MonoBehaviour
 
     private void Awake()
     {
-        PlayerPrefs.SetInt("Coins", 100);
+        //PlayerPrefs.SetInt("Coins", 100);
         //PlayerPrefs.SetInt("skin1status", 0);
         //PlayerPrefs.SetInt("skin2status", 0);
     }
@@ -49,6 +49,7 @@ public class skinmanager : MonoBehaviour
             }
             else
             {
+                PlayerPrefs.SetInt("PlayerSkin", 1);
                 print("Already unlocked");
             }
 
@@ -82,6 +83,7 @@ public class skinmanager : MonoBehaviour
             }
             else
             {
+                PlayerPrefs.SetInt("PlayerSkin", 2);
                 print("Already unlocked");
             }
 
@@ -116,6 +118,7 @@ public class skinmanager : MonoBehaviour
             else
             {
                 print("Already unlocked");
+                PlayerPrefs.SetInt("PlayerSkin", 3);
             }
 
 

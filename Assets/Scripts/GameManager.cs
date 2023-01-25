@@ -108,21 +108,21 @@ public class GameManager : MonoBehaviour
     {
 
         PlayerPrefs.SetInt("levelspawncount", 50);
-        SceneManager.LoadScene("roadsample");
+        SceneManager.LoadScene("Level2");
     }
 
     public void level3()
     {
 
         PlayerPrefs.SetInt("levelspawncount", 50);
-        SceneManager.LoadScene("roadsample");
+        SceneManager.LoadScene("Level3");
     }
 
     public void LevelSelect()
     {
 
         PlayerPrefs.SetInt("levelspawncount", 50);
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("LevelSelect2");
     }
 
     public void PlaySelectedLevel()
@@ -168,6 +168,16 @@ public class GameManager : MonoBehaviour
 
         PlayerPrefs.SetInt("levelspawncount", 50);
         SceneManager.LoadScene("main_menu");
+    }
+
+    public void quit()
+    {
+        Application.Quit();
+    }
+
+    public void retry()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
 
