@@ -29,7 +29,8 @@ public class CountdownTimer : MonoBehaviour
         }
 
         Time.timeScale = 1;
-        timerObject.SetActive(false);
+        //timerObject.SetActive(false);
         // Do something when time is up
+        timerText.text = "";
     }
 }

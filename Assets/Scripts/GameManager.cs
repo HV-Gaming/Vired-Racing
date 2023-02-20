@@ -102,7 +102,7 @@ public class GameManager : MonoBehaviour
     public void quit()
     {
         Application.Quit();
-        PlayerPrefs.SetInt("Coins", (PlayerPrefs.GetInt("Coins")) + 200);
+        //PlayerPrefs.SetInt("Coins", (PlayerPrefs.GetInt("Coins")) + 200);
     }
 
     public void retry()

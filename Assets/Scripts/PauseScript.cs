@@ -10,6 +10,7 @@ public class PauseScript : MonoBehaviour
     // Start is called before the first frame update
     private bool isPaused = false;
     public GameObject PauseMenu;
+    public GameObject TimerObject;
 
 
     void Start()
@@ -37,6 +38,7 @@ public class PauseScript : MonoBehaviour
         Time.timeScale = 0;
         isPaused = true;
         PauseMenu.SetActive(true);
+        TimerObject.SetActive(false);
     }
 
     void ResumeGame()
@@ -44,6 +46,7 @@ public class PauseScript : MonoBehaviour
         Time.timeScale = 1;
         isPaused = false;
         PauseMenu.SetActive(false);
+        TimerObject.SetActive(true);
     }
 }
 
